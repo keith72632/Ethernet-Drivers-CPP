@@ -1,0 +1,2 @@
+spi.cpp:11:7:void Spi::spi::spi_config()	16	static
+spi.cpp:23:7:void Spi::spi::transmit(uint8_t*, uint32_t)	32	static

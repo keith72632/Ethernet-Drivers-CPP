@@ -1,0 +1,1 @@
+rcc.cpp:14:7:void Rcc::APB2ENR::start_spi1_clk()	16	static
