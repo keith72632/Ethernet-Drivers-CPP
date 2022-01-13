@@ -20,15 +20,18 @@
 #include <stdio.h>
 #include "rcc.h"
 #include "spi.h"
+#include "gpio.h"
 
+#define APB2    0x40023844
+#define AHB1    0x40023830
 int main(void)
 {
 	uint8_t spiData[2];
 	spiData[0] = 0x00;
-	Rcc::APB2ENR_t *apb2 = (Rcc::APB2ENR_t*)0x40023844;
-	apb2->start_spi1_clk();
 	Spi::SPI_t *spi1 = (Spi::SPI_t*)0x40013000;
-	spi1->spi_config();
+	spi1->spi_config(APB2, AHB1);
+
+	spi1->toggle_ss();
 	spi1->transmit(spiData, 1);
 
     /* Loop forever */

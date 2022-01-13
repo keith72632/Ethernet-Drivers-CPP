@@ -1,0 +1,2 @@
+gpio.cpp:12:7:void Gpio::config_mode(uint32_t, uint8_t, uint8_t)	24	static
+gpio.cpp:18:7:void Gpio::toggle_pin(uint32_t, uint8_t)	24	static

@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include "rcc.h"
+#include "gpio.h"
 
 //CR1 Bitfield
 #define CPHA       0
@@ -46,8 +47,13 @@ namespace Spi{
 		uint32_t I2SCFGR;
 		uint32_t I2SPR;
 	public:
-		void spi_config(void);
+		void spi_config(uint32_t rcc_spi, uint32_t rcc_gpio);
 		void transmit(uint8_t *data, uint32_t size);
+		void receive(uint8_t *data, uint32_t size);
+		void pin_config(void);
+		void toggle_ss(void);
+		void pull_ss_high(void);
+		void pull_ss_low(void);
 	}__attribute__((packed))SPI_t;
 }
 

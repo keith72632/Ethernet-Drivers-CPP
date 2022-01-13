@@ -1,3 +1,4 @@
+"./Src/gpio.o"
 "./Src/main.o"
 "./Src/rcc.o"
 "./Src/spi.o"

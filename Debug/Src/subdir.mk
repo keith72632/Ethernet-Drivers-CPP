@@ -9,6 +9,7 @@ C_SRCS += \
 ../Src/sysmem.c 
 
 CPP_SRCS += \
+../Src/gpio.cpp \
 ../Src/main.cpp \
 ../Src/rcc.cpp \
 ../Src/spi.cpp 
@@ -18,6 +19,7 @@ C_DEPS += \
 ./Src/sysmem.d 
 
 OBJS += \
+./Src/gpio.o \
 ./Src/main.o \
 ./Src/rcc.o \
 ./Src/spi.o \
@@ -25,6 +27,7 @@ OBJS += \
 ./Src/sysmem.o 
 
 CPP_DEPS += \
+./Src/gpio.d \
 ./Src/main.d \
 ./Src/rcc.d \
 ./Src/spi.d 
@@ -39,7 +42,7 @@ Src/%.o: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/main.d ./Src/main.o ./Src/rcc.d ./Src/rcc.o ./Src/spi.d ./Src/spi.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o
+	-$(RM) ./Src/gpio.d ./Src/gpio.o ./Src/main.d ./Src/main.o ./Src/rcc.d ./Src/rcc.o ./Src/spi.d ./Src/spi.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o
 
 .PHONY: clean-Src
 

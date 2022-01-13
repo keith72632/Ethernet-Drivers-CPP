@@ -1,1 +1,3 @@
 rcc.cpp:14:7:void Rcc::APB2ENR::start_spi1_clk()	16	static
+rcc.cpp:18:7:void Rcc::AHB1ENR::start_clock_a()	16	static
+rcc.cpp:23:7:void Rcc::AHB1ENR::start_clock_d()	16	static
