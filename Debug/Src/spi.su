@@ -1,7 +1,7 @@
 spi.cpp:11:7:void Spi::spi::spi_config(uint32_t, uint32_t)	32	static
-spi.cpp:32:7:void Spi::spi::transmit(uint8_t*, uint32_t)	32	static
-spi.cpp:61:7:void Spi::spi::receive(uint8_t*, uint32_t)	24	static
-spi.cpp:85:7:void Spi::spi::pin_config()	24	static
-spi.cpp:94:7:void Spi::spi::toggle_ss()	24	static
-spi.cpp:100:7:void Spi::spi::pull_ss_high()	24	static
-spi.cpp:106:7:void Spi::spi::pull_ss_low()	24	static
+spi.cpp:32:7:void Spi::spi::transmit(uint8_t, uint8_t)	24	static
+spi.cpp:57:7:void Spi::spi::receive(uint8_t*, uint8_t)	24	static
+spi.cpp:81:7:void Spi::spi::pin_config()	24	static
+spi.cpp:90:7:void Spi::spi::toggle_ss()	24	static
+spi.cpp:96:7:void Spi::spi::pull_ss_high()	24	static
+spi.cpp:102:7:void Spi::spi::pull_ss_low()	24	static

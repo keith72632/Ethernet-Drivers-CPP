@@ -20,7 +20,7 @@ namespace Spi {
 		this->pin_config();
 
 		//CPHA = 1, CPOL = 1, Enable Master Mode, BR[2:0] = 011: fPCLK/16, PCLK2 = 80MHz, SPI clk = 5MHz
-		this->CR1 |= ( 1 << CPHA ) | ( 1 << CPOL ) | ( 1 << MSTR ) | ( 3 << BR );
+		this->CR1 |= ( 1 << MSTR ) | ( 2 << BR );
 		//Frame format . 0 = Most Significant Bit First, 1 = Least Significant Bit First
 		this->CR1 &= ~( 1 << LSB );
 		//Software slave management
@@ -29,8 +29,9 @@ namespace Spi {
 		this->CR1 &= ~(1 << RX_ONLY) & ~( 1 << DFF );
 	}
 
-	void SPI_t::transmit(uint8_t *data, uint32_t size)
+	void SPI_t::transmit(uint8_t data, uint8_t size)
 	{
+//		uint32_t *dr = (uint32_t*)0x4001300c;
 		/************** STEPS TO FOLLOW *****************
 		1. Wait for the TXE bit to set in the Status Register
 		2. Write the data to the Data Register
@@ -38,27 +39,22 @@ namespace Spi {
 		4. Clear the Overrun flag by reading DR and SR
 		************************************************/
 
-		uint32_t i = 0;
-		while(i < size)
-		{
-			while(!(( this->SR ) & ( 1 << TXE ))){}; //wait for the TXE bit to be set, this will indicate buffer is empty
-			this->DR = data[i];
-			i++;
-		}
+		while(!(( this->SR ) & ( 1 << 1 ))){}; //wait for the TXE bit to be set, this will indicate buffer is empty
+		this->DR = data;
 		/*During discontinuous communications, there is a 2 APB clock period delay between the
 		write operation to the SPI_DR register and BSY bit setting. As a consequence it is
 		mandatory to wait first until TXE is set and then until BSY is cleared after writing the last
 		data.
 		*/
-		while(!(( this->SR ) & ( 1<<TXE ))){}; //Wait for TXE bit to be set, indicates buffer is empty
-		while((( this->SR ) & ( 1 << BSY ))){}; //Wait for BSY to reset, indicates that SPI is not busy
+	    while (this->SR & 0x80) {};      /* wait for transmission done */
+		while((( this->SR ) & ( 1 << 7 ))){}; //Wait for BSY to reset, indicates that SPI is not busy
 
 		//clear the overrun flag by reading DR and SR
 		uint8_t temp = this->DR;
 		temp = this->SR;
 	}
 
-	void SPI_t::receive(uint8_t *data, uint32_t size)
+	void SPI_t::receive(uint8_t *data, uint8_t size)
 	{
 		/************** STEPS TO FOLLOW *****************
 		1. Wait for the BSY bit to reset in Status Register
@@ -74,7 +70,7 @@ namespace Spi {
 			//2.
 			this->DR = 0x00;
 			//3.
-			while(!(( this->SR ) & ( 1 << RXNE ))){};
+			while((( this->SR ) & ( 1 << 0 ))){};
 			//4.
 			*data++ = this->DR;
 			size--;

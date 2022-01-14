@@ -26,13 +26,16 @@
 #define AHB1    0x40023830
 int main(void)
 {
-	uint8_t spiData[2];
+	uint8_t spiData[1];
+	uint8_t rxData[1];
 	spiData[0] = 0x00;
 	Spi::SPI_t *spi1 = (Spi::SPI_t*)0x40013000;
 	spi1->spi_config(APB2, AHB1);
 
-	spi1->toggle_ss();
-	spi1->transmit(spiData, 1);
+	spi1->pull_ss_low();
+	spi1->transmit(spiData[0], 1);
+	spi1->receive(&rxData[0], 1);
+	spi1->pull_ss_high();
 
     /* Loop forever */
 	for(;;);

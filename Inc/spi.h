@@ -48,8 +48,8 @@ namespace Spi{
 		uint32_t I2SPR;
 	public:
 		void spi_config(uint32_t rcc_spi, uint32_t rcc_gpio);
-		void transmit(uint8_t *data, uint32_t size);
-		void receive(uint8_t *data, uint32_t size);
+		void transmit(uint8_t data, uint8_t size);
+		void receive(uint8_t *data, uint8_t size);
 		void pin_config(void);
 		void toggle_ss(void);
 		void pull_ss_high(void);
